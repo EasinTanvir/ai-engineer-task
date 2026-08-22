@@ -2,6 +2,7 @@
 
 import { Bot, ChevronRight, Flag, User } from "lucide-react";
 import { summarizeToolCall } from "@/lib/chat";
+import { MarkdownContent } from "./Markdowncontent";
 
 function ToolTrace({ calls }) {
   if (!calls?.length) return null;
@@ -56,7 +57,7 @@ export function Message({ message }) {
       </div>
 
       <div
-        className={`flex max-w-[85%] flex-col sm:max-w-[70%] ${isUser ? "items-end" : "items-start"}`}
+        className={`flex max-w-[85%] flex-col sm:max-w-[70%] ${isUser ? "items-end" : "items-start sm:max-w-[85%]"}`}
       >
         <span className="mb-1 px-1 text-[11px] font-medium text-ink-muted">
           {isUser ? "You" : "ParcelPilot Support"}
@@ -70,15 +71,15 @@ export function Message({ message }) {
           </div>
         )}
 
-        <div
-          className={`whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-[14px] leading-relaxed ${
-            isUser
-              ? "rounded-br-sm bg-accent text-white"
-              : "rounded-bl-sm border border-border bg-surface text-ink"
-          }`}
-        >
-          {message.content}
-        </div>
+        {isUser ? (
+          <div className="whitespace-pre-wrap rounded-2xl rounded-br-sm bg-accent px-4 py-2.5 text-[14px] leading-relaxed text-white">
+            {message.content}
+          </div>
+        ) : (
+          <div className="w-full rounded-2xl rounded-bl-sm border border-border bg-surface px-4 py-3">
+            <MarkdownContent content={message.content} />
+          </div>
+        )}
 
         {!isUser && <ToolTrace calls={message.toolCalls} />}
       </div>

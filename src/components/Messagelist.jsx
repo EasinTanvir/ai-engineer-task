@@ -1,7 +1,7 @@
 "use client";
 
 import { Send } from "lucide-react";
-import { Message, TypingIndicator } from "./ToolTrace";
+import { Message, TypingIndicator } from "./Message";
 
 export function MessageList({ messages, loading, endRef }) {
   return (
