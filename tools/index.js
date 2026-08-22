@@ -36,22 +36,28 @@ export function createSupportTools({ accountId, sessionId, turn, confirmedToken,
       const embedding = await embedText(query);
       const params = [accountId, vectorLiteral(embedding)];
       const current = await pool.query(`
-        SELECT source_file, content, source_type, version_status, authority_rank, account_scope,
-          embedding <=> $2::vector AS distance
-        FROM document_chunks
-        WHERE (account_scope = $1 OR account_scope IS NULL) AND version_status <> 'deprecated'
-        ORDER BY authority_rank ASC, embedding <=> $2::vector ASC
-        LIMIT 8
+        SELECT * FROM (
+          SELECT DISTINCT ON (source_file) source_file, content, source_type, version_status, authority_rank, account_scope,
+            embedding <=> $2::vector AS distance
+          FROM document_chunks
+          WHERE (account_scope = $1 OR account_scope IS NULL) AND version_status <> 'deprecated'
+          ORDER BY source_file, embedding <=> $2::vector ASC
+        ) ranked
+        ORDER BY authority_rank ASC, distance ASC
+        LIMIT 5
       `, params);
       const rows = current.rowCount ? current.rows : (await pool.query(`
-        SELECT source_file, content, source_type, version_status, authority_rank, account_scope,
-          embedding <=> $2::vector AS distance
-        FROM document_chunks
-        WHERE account_scope = $1 OR account_scope IS NULL
-        ORDER BY authority_rank ASC, embedding <=> $2::vector ASC
-        LIMIT 8
+        SELECT * FROM (
+          SELECT DISTINCT ON (source_file) source_file, content, source_type, version_status, authority_rank, account_scope,
+            embedding <=> $2::vector AS distance
+          FROM document_chunks
+          WHERE account_scope = $1 OR account_scope IS NULL
+          ORDER BY source_file, embedding <=> $2::vector ASC
+        ) ranked
+        ORDER BY authority_rank ASC, distance ASC
+        LIMIT 5
       `, params)).rows.map((row) => ({ ...row, stale: true }));
-      return { query, results: rows.map((row) => ({ ...row, stale: row.stale ?? false })) };
+      return { query, results: rows.map((row) => ({ ...row, content: row.content.slice(0, 900), stale: row.stale ?? false })) };
     }), {
       name: "search_policy_docs",
       description: "Search authoritative agreements, SOPs, policies, and product documentation for the signed-in account.",
