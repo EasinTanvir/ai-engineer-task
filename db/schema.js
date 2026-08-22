@@ -80,3 +80,18 @@ export const documentChunks = pgTable(
     index("document_chunks_authority_rank_idx").on(table.authorityRank),
   ],
 );
+
+export const escalations = pgTable(
+  "escalations",
+  {
+    id: serial("id").primaryKey(),
+    accountId: text("account_id")
+      .notNull()
+      .references(() => accounts.accountId, { onDelete: "cascade" }),
+    ticketOrOrderId: text("ticket_or_order_id").notNull(),
+    reason: text("reason").notNull(),
+    status: text("status").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+  },
+  (table) => [index("escalations_account_id_idx").on(table.accountId)],
+);
