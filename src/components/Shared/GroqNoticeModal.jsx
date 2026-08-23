@@ -51,11 +51,11 @@ export function GroqNoticeModal() {
         </div>
         <p className="text-sm leading-6 text-slate-600">
           This demo uses the Groq free API. If responses stop working, the free
-          tier's rate limit has likely been reached for the moment.
+          tier&apos;s rate limit has likely been reached for the moment.
         </p>
         <p className="mt-3 rounded-lg bg-slate-50 p-3 text-sm leading-6 text-slate-700">
-          <strong>If you're evaluating this project:</strong> set your own key
-          as{" "}
+          <strong>If you&apos;re evaluating this project:</strong> set your own
+          key as{" "}
           <code className="rounded bg-slate-200 px-1 py-0.5 text-xs">
             GROQ_API_KEY
           </code>{" "}
