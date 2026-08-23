@@ -54,17 +54,17 @@ npm install
 
 ### 2. Environment variables
 
-Copy the example file and fill in your own values:
-
-```bash
-cp .env.example .env
-```
-
-`.env.example` contains:
+A `.env.example` file is already included in the repo. Create a `.env` file in the project root, using the exact same variable names as `.env.example`, and fill in your own values:
 
 ```dotenv
 DATABASE_URL=
 GROQ_API_KEY=
+```
+
+If you're using Neon Postgres, your connection string will look like this — just replace the password inside `<>` with your own:
+
+```dotenv
+postgresql://neondb_owner:<password>@ep-late-union-aygv23p9-pooler.c-5.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
 | Variable       | Required | Notes                                                                                   |
@@ -90,6 +90,8 @@ npm run migrate:sheet    # accounts, orders, tickets → Postgres tables
 npm run migrate:pdfs     # 6 PDFs → chunked, embedded, stored in pgvector
 npm run migrate:verify   # confirms row/chunk counts and spot-checks metadata
 ```
+
+**Note:** `migrate:pdfs` chunks and embeds all 6 documents locally, which takes roughly 40 seconds to 1 minute. Please be patient and don't close the terminal or kill the process while it's running.
 
 Expect `migrate:sheet` to report 4 accounts, 6 orders, 7 tickets, and `migrate:pdfs` to report chunks across all 6 PDFs. `migrate:verify` re-checks this automatically.
 
@@ -143,3 +145,9 @@ docs/                # architecture note, product note, AI tool usage
 prompts/             # staged build specs used during development (for reference)
 .agents/             # installed dev-agent skills (development tooling, not app code)
 ```
+
+---
+
+## Security Note
+
+`.env` contains real credentials and must never be committed. Confirm it's listed in `.gitignore` before pushing. If you're forking or evaluating this repo, copy `.env.example` to `.env` and fill in your own `DATABASE_URL` and `GROQ_API_KEY`.
