@@ -2,9 +2,6 @@
 
 An AI support agent for ParcelPilot, a B2B logistics platform. It answers customer questions about orders, cancellations, service credits, and SLAs by reasoning over the company's real policy documents, signed customer agreements, and operational data — while respecting document authority, account access boundaries, and requiring human confirmation before taking any action.
 
-**Live demo:** `<ADD_HOSTED_URL_HERE>`
-**Demo video (~5 min):** `<ADD_GOOGLE_DRIVE_LINK_HERE>`
-
 > **Note on the live demo:** it runs on the Groq free-tier API. If you see a "Service notice" modal or responses stop returning, the free tier's rate limit has likely been reached. Either wait a few minutes, or run the project locally with your own `GROQ_API_KEY` (see below).
 
 ---
