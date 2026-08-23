@@ -8,9 +8,9 @@ An AI support agent for ParcelPilot, a B2B logistics platform. It answers custom
 
 ## Documentation
 
-- [Architecture Note](/docs/ARCHITECTURE_NOTE.md) — agent design, tool design, data handling, source reliability, technical trade-offs
-- [Product Note](/docs/PRODUCT_NOTE.md) — chosen additional problem, future roadmap, scope cuts, success metric
-- [AI Tool Usage](/docs/AI_TOOL_USAGE.md) — which AI tools were used and how
+- [Architecture Note](./docs/ARCHITECTURE_NOTE.md) — agent design, tool design, data handling, source reliability, technical trade-offs
+- [Product Note](./docs/PRODUCT_NOTE.md) — chosen additional problem, future roadmap, scope cuts, success metric
+- [AI Tool Usage](./docs/AI_TOOL_USAGE.md) — which AI tools were used and how
 
 ---
 
