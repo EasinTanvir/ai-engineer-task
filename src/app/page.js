@@ -5,6 +5,7 @@ import { ACCOUNTS } from "@/lib/chat";
 import { ChatHeader } from "@/components/ChatHeader";
 import { MessageList } from "@/components/Messagelist";
 import { Composer } from "@/components/Composer";
+import { GroqNoticeModal } from "@/components/Shared/GroqNoticeModal";
 
 export default function HomePage() {
   const [accountId, setAccountId] = useState(ACCOUNTS[0].id);
@@ -37,8 +38,8 @@ export default function HomePage() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
   // Session initialization intentionally synchronizes React state with the selected account.
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     startSession(accountId);
   }, [accountId]);
 
@@ -77,6 +78,7 @@ export default function HomePage() {
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden bg-canvas text-ink">
+      <GroqNoticeModal />
       <ChatHeader
         accountId={accountId}
         onAccountChange={setAccountId}
