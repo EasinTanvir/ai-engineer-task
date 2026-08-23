@@ -36,7 +36,7 @@ export function GroqNoticeModal() {
               Service notice
             </p>
             <h2 id="groq-notice-title" className="text-xl font-bold">
-              Powered by Groq free API
+              Hosting and Api Limitation
             </h2>
           </div>
           <button
@@ -49,20 +49,39 @@ export function GroqNoticeModal() {
             &times;
           </button>
         </div>
-        <p className="text-sm leading-6 text-slate-600">
-          This demo uses the Groq free API. If responses stop working, the free
-          tier&apos;s rate limit has likely been reached for the moment.
-        </p>
-        <p className="mt-3 rounded-lg bg-slate-50 p-3 text-sm leading-6 text-slate-700">
-          <strong>If you&apos;re evaluating this project:</strong> set your own
-          key as{" "}
-          <code className="rounded bg-slate-200 px-1 py-0.5 text-xs">
-            GROQ_API_KEY
-          </code>{" "}
-          in the{" "}
-          <code className="rounded bg-slate-200 px-1 py-0.5 text-xs">.env</code>{" "}
-          file (see the repo README for setup steps) to continue testing.
-        </p>
+        <div className="space-y-4 text-sm leading-6 text-slate-600">
+          <div>
+            <p className="font-semibold text-slate-900">Hosting limitation</p>
+            <p>
+              This app is currently hosted on Vercel. Vercel builds serverless
+              functions, which can fail to include the native dependency this
+              app's local embedding model needs. If a request fails
+              unexpectedly, this is the likely cause - not a bug in the
+              application. A VPS or any host running a persistent Node process
+              would not have this issue.
+            </p>
+          </div>
+          <div>
+            <p className="font-semibold text-slate-900">Groq API limit</p>
+            <p>
+              Chat responses use the Groq free-tier API. If responses stop
+              returning, the free tier's rate limit has likely been reached for
+              the moment.
+            </p>
+          </div>
+          <p className="rounded-lg bg-slate-50 p-3 text-slate-700">
+            <strong>Recommended:</strong> if something doesn't work here, please
+            run the project locally - set your own{" "}
+            <code className="rounded bg-slate-200 px-1 py-0.5 text-xs">
+              GROQ_API_KEY
+            </code>{" "}
+            in{" "}
+            <code className="rounded bg-slate-200 px-1 py-0.5 text-xs">
+              .env
+            </code>{" "}
+            and follow the setup steps in the repo README.
+          </p>
+        </div>
         <button
           type="button"
           onClick={() => setIsOpen(false)}
