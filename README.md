@@ -127,7 +127,7 @@ On load, choose one of the four mocked accounts (`ACCT-001` Northstar, `ACCT-002
 - _"Can I cancel ORD-1001 without a cancellation fee?"_
 - _"A pickup was three hours late because of carrier fault — am I owed a service credit?"_
 
-The internal proactive-detection view is available separately at `/api/internal/proactive-detection` (requires the mocked internal role — see the Architecture Note for details).
+The internal proactive-detection view is available separately at `/api/internal/proactive-detection`.
 
 ---
 
