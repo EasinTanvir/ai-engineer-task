@@ -2,6 +2,9 @@
 
 An AI support agent for ParcelPilot, a B2B logistics platform. It answers customer questions about orders, cancellations, service credits, and SLAs by reasoning over the company's real policy documents, signed customer agreements, and operational data — while respecting document authority, account access boundaries, and requiring human confirmation before taking any action.
 
+**Live demo:** `<ADD_HOSTED_URL_HERE>`
+**Demo video (~5 min):** `<ADD_GOOGLE_DRIVE_LINK_HERE>`
+
 > **Note on the live demo:** it runs on the Groq free-tier API. If you see a "Service notice" modal or responses stop returning, the free tier's rate limit has likely been reached. Either wait a few minutes, or run the project locally with your own `GROQ_API_KEY` (see below).
 
 ---
@@ -41,7 +44,7 @@ An AI support agent for ParcelPilot, a B2B logistics platform. It answers custom
 ### Prerequisites
 
 - Node.js 20+
-- A Neon Postgres database (or any Postgres instance with the `vector` extension available)
+- A Postgres database that supports the `vector` extension — [Neon](https://neon.com) is recommended and what this project was built against
 - A [Groq API key](https://console.groq.com) (free tier is sufficient)
 
 ### 1. Clone and install
@@ -54,16 +57,22 @@ npm install
 
 ### 2. Environment variables
 
-Create a `.env` file in the project root:
+Copy the example file and fill in your own values:
+
+```bash
+cp .env.example .env
+```
+
+`.env.example` contains:
 
 ```dotenv
-DATABASE_URL=postgresql://neondb_owner:<password>@ep-late-union-aygv23p9-pooler.c-5.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+DATABASE_URL=
 GROQ_API_KEY=
 ```
 
 | Variable       | Required | Notes                                                                                   |
 | -------------- | -------- | --------------------------------------------------------------------------------------- |
-| `DATABASE_URL` | Yes      | Neon (or any Postgres) connection string. Must support the `vector` extension.          |
+| `DATABASE_URL` | Yes      | Postgres connection string (Neon or any provider) that supports the `vector` extension. |
 | `GROQ_API_KEY` | Yes      | From [console.groq.com](https://console.groq.com). Free tier works but is rate-limited. |
 
 ### 3. Add the source data
@@ -95,7 +104,7 @@ npm run test:agent
 
 Runs a set of scripted questions against the live agent to sanity-check retrieval and reasoning outside the chat UI.
 
-### 5. Run in development
+### 6. Run in development
 
 ```bash
 npm run dev
@@ -103,7 +112,7 @@ npm run dev
 
 App runs at `http://localhost:3000`.
 
-### 6. Run in production
+### 7. Run in production
 
 ```bash
 npm run build
@@ -127,7 +136,7 @@ The internal proactive-detection view is available separately at `/api/internal/
 
 ```
 pdf/                 # source PDFs
-excelSheet/           # source spreadsheet
+excelSheet/          # source spreadsheet
 scripts/             # migration, verification, and manual test scripts (idempotent)
 db/                  # Drizzle schema
 lib/                 # LLM client, agent, pending-actions (confirmation tokens)
