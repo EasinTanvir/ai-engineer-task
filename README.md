@@ -145,9 +145,3 @@ docs/                # architecture note, product note, AI tool usage
 prompts/             # staged build specs used during development (for reference)
 .agents/             # installed dev-agent skills (development tooling, not app code)
 ```
-
----
-
-## Security Note
-
-`.env` contains real credentials and must never be committed. Confirm it's listed in `.gitignore` before pushing. If you're forking or evaluating this repo, copy `.env.example` to `.env` and fill in your own `DATABASE_URL` and `GROQ_API_KEY`.
