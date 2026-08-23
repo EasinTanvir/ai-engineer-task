@@ -91,7 +91,7 @@ npm run migrate:pdfs     # 6 PDFs → chunked, embedded, stored in pgvector
 npm run migrate:verify   # confirms row/chunk counts and spot-checks metadata
 ```
 
-**Note:** `migrate:pdfs` chunks and embeds all 6 documents locally, which takes roughly 40 seconds to 1 minute. Please be patient and don't close the terminal or kill the process while it's running.
+**Note:** `migrate:pdfs` chunks and embeds all 6 documents locally, which takes roughly 1 to 2 minute. Please be patient and don't close the terminal or kill the process while it's running.
 
 Expect `migrate:sheet` to report 4 accounts, 6 orders, 7 tickets, and `migrate:pdfs` to report chunks across all 6 PDFs. `migrate:verify` re-checks this automatically.
 
