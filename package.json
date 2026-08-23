@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "eslint",
     "migrate:sheet": "node scripts/migrate-sheet.js",
-    "migrate:pdfs": "node scripts/migrate-pdfs.js"
+    "migrate:pdfs": "node scripts/migrate-pdfs.js",
+    "migrate:verify": "node scripts/verify-migration.js",
+    "test:agent": "node scripts/test-agent.js"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.2.0",
