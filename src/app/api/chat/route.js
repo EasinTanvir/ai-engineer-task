@@ -39,7 +39,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         error:
-          "GROQ API key limit reached the support agent could not complete this request or .",
+          "The support agent could not complete this request or maybe GROQ API max limited reached. Please try again.",
       },
       { status: 500 },
     );

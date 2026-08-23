@@ -22,7 +22,17 @@ try {
     from document_chunks
     where source_file = '02_Support_Policy_v2_DEPRECATED.pdf'
   `);
-  console.log(JSON.stringify({ documents: documents.rows, northstar: northstar.rows, deprecated: deprecated.rows }, null, 2));
+  console.log(
+    JSON.stringify(
+      {
+        documents: documents.rows,
+        northstar: northstar.rows,
+        deprecated: deprecated.rows,
+      },
+      null,
+      2,
+    ),
+  );
 } finally {
   await pool.end();
 }
