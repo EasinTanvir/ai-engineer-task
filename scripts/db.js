@@ -33,7 +33,7 @@ export async function ensureSchema() {
     carrier text NOT NULL, status text NOT NULL, booked_at timestamptz NOT NULL,
     pickup_window_start timestamptz NOT NULL, pickup_window_end timestamptz NOT NULL,
     pickup_actual_at timestamptz, shipment_fee_inr integer NOT NULL,
-    carrier_fault boolean NOT NULL, customer_fault boolean NOT NULL,
+    carrier_fault boolean, customer_fault boolean,
     cancellation_requested_at timestamptz, notes text NOT NULL
   )`);
   await pool.query(

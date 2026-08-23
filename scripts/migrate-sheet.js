@@ -37,6 +37,15 @@ function asBoolean(value) {
   throw new Error(`Expected TRUE or FALSE, received ${value}.`);
 }
 
+// Fault fields may genuinely be unknown (blank cell) — the SOP explicitly
+// says not to promise a credit when fault is unknown, so this must be
+// representable as null, not forced into true/false or crash ingestion.
+function asOptionalBoolean(row, key) {
+  const value = row[key];
+  if (value === null || value === "") return null;
+  return asBoolean(value);
+}
+
 function asTimestamp(value) {
   const normalized = value.includes("T") ? value : value.replace(" ", "T");
   const timestamp = new Date(`${normalized}${indiaOffset}`);
@@ -95,8 +104,8 @@ async function migrateSheet() {
           required(row, "shipment_fee_inr"),
           "shipment_fee_inr",
         ),
-        carrierFault: asBoolean(required(row, "carrier_fault")),
-        customerFault: asBoolean(required(row, "customer_fault")),
+        carrierFault: asOptionalBoolean(row, "carrier_fault"),
+        customerFault: asOptionalBoolean(row, "customer_fault"),
         cancellationRequestedAt: optional(row, "cancellation_requested_at")
           ? asTimestamp(required(row, "cancellation_requested_at"))
           : null,
